@@ -1,11 +1,14 @@
 import {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import "./navbar.scss";
 import {Icons} from "../../data/icons.ts";
+import {Routes} from "../../data/routes.ts";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const {pathname} = useLocation();
+    console.log(location.pathname)
+    console.log(pathname.indexOf(Routes.HOME) >= 0)
     return (
         <>
             {isOpen && <div className="black-container" onClick={() => setIsOpen(false)}/>}
@@ -35,7 +38,7 @@ const Navbar = () => {
                                 {isOpen && <div className="nav-label">Search</div>}
                             </NavLink>
                         </li>
-                        <li className={"active-route"}>
+                        <li className={pathname.includes(Routes.HOME) ? "active-route" : ""}>
                             <NavLink to="/home">
                                 <div className="nav-icon">
                                     <img src={Icons.HOME} alt="Home"/>
